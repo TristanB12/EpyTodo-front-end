@@ -33,6 +33,9 @@ import navContent from '@/datas/navContent.js'
 .nav-bar-container {
     background-color: #F4F4F4;
     height: 70px;
+    position: sticky;
+    top: 0;
+    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.25);
 }
 .nav-bar {
     width: 80%;

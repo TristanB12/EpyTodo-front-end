@@ -26,13 +26,13 @@ const routes = [
       }
     ],
   },
-  //{
-  //  path: '/about',
-  //  name: 'About',
-  //  component: function () {
-  //    return import(/* webpackChunkName: "about" */ '../views/About.vue')
-  //  }
-  //}
+  {
+    path: '/home',
+    name: 'HomePage',
+    component: function () {
+      return import(/* webpackChunkName: "homePage" */ '../views/HomePage.vue')
+    }
+  }
 ]
 
 const router = new VueRouter({
