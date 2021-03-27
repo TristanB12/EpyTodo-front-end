@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <NavBar />
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -26,5 +28,16 @@ import NavBar from '@/components/NavBar.vue';
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.router-link-exact-active {
+  text-decoration: underline !important;
 }
 </style>
