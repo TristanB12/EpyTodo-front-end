@@ -1,20 +1,48 @@
 <template>
     <div class="sign-up">
         <h3>Name</h3>
-        <input type="text" placeholder="Your name here..">
+        <input type="text" placeholder="Your name here.." v-model="name">
         <h3>Firstname</h3>
-        <input type="text" placeholder="Your first name here..">
+        <input type="text" placeholder="Your first name here.." v-model=firstname>
         <h3>Email</h3>
-        <input type="text"  placeholder="Your mail adress here..">
+        <input type="text"  placeholder="Your mail adress here.." v-model="email">
         <h3>Password</h3>
-        <input type="password" placeholder="Your strong password here..">
-        <button>Sign up</button>
+        <input type="password" placeholder="Your strong password here.." v-model="password">
+        <button @click="signUp()">Sign up</button>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
     export default {
-        
+        data() {
+            return {
+                name: '',
+                firstname: '',
+                email: '',
+                password: '',
+                error: ''
+            }
+        },
+        methods: {
+            signUp() {
+                if (this.name != '' && this.firstname != '' &&
+                    this.email != '' && this.password != '')
+                axios.post("http://localhost:8080/register", {
+                    email: this.email,
+                    name: this.name,
+                    firstname: this.firstname,
+                    password: this.password
+                })
+                .then(response => {
+                    this.$store.dispatch('setToken', response.data.token)
+                    this.$router.push({name: 'HomePage'})
+                })
+                .catch(err => {
+                    this.error = err.response.data.msg
+                })
+            }
+        },
     }
 </script>
 

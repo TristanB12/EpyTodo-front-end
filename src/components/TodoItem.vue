@@ -8,7 +8,17 @@
             </div>
         </div>
         <div class="todo-details" v-if="detailsOpened">
-            TODO DETAILS
+            <span class="description"> {{ todo.description }} </span>
+            <div class="actions">
+                <span @mouseover="editHover()" @mouseleave="editHover()">
+                    <img v-if="!isEditHover" src="@/assets/edit.png" alt="">
+                    <img  v-else src="@/assets/edit-hover.png" alt="">
+                </span>
+                <span @mouseover="deleteHover()"  @mouseleave="deleteHover()">
+                    <img v-if="!isDeleteHover" src="@/assets/delete.png" alt="">
+                    <img  v-else src="@/assets/delete-hover.png" alt="">
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -23,12 +33,20 @@
         },
         data() {
             return {
-                detailsOpened: false
+                detailsOpened: false,
+                isEditHover: false,
+                isDeleteHover: false
             }
         },
         methods: {
             clickOnTodo() {
-                this.detailsOpened = !this.detailsOpened;
+                this.detailsOpened = !this.detailsOpened
+            },
+            editHover() {
+                this.isEditHover = !this.isEditHover
+            },
+            deleteHover() {
+                this.isDeleteHover = !this.isDeleteHover
             }
         },
     }
@@ -39,8 +57,8 @@
     background-color: #F3F3F3;
     box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.25);
 
-     &:hover {
-        background-color: rgb(223, 223, 223);
+    &:hover {
+        box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.25);
         transition-duration: 200ms;
     }
 }
@@ -87,5 +105,24 @@
 }
 .stopped {
     background-color: #EB3B5A;
+}
+.todo-details {
+    padding: 20px 0px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: center;
+}
+.description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+.actions {
+    display: flex;
+    justify-content: space-around;
+    img {
+        height: 30px;
+        cursor: pointer;
+    }
 }
 </style>
